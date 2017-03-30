@@ -25,15 +25,23 @@ class JobsController < ApplicationController
   end
 
   def edit
-    # implement on your own!
+    @company = Company.find(params[:company_id])
+    @job = Job.find(params[:id])
   end
 
   def update
-    # implement on your own!
+    # @company = Company.find(params[:company_id])
+    @job = Job.find(params[:id])
+    @job.update(job_params)
+    # redirect_to company_job_path(@company, @job) #any way to redirect without finding company?
+    # redirect_to company_job_path(params[:company_id], @job) #is this better, since it skips Company.find?
+    render :show       #Probably best method
   end
 
   def destroy
-    # implement on your own!
+    @job = Job.find(params[:id])
+    @job.destroy
+    redirect_to company_jobs_path
   end
 
   private
